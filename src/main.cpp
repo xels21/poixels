@@ -2,7 +2,6 @@
 #include "log.h"     ///< for logging
 #include "time.h"    ///< for timing stuff..
 
-// #ifdef ESP32
 void setup()
 {
   log_init(LOG_LEVEL_INFO);
@@ -25,9 +24,20 @@ void setup()
 
 void loop()
 {
-  // webServer->handleClient();
-  // display->update();
   LOG_DEBUG("POIXELS", "Loop iteration complete");
 
   sleep(1000); // Delay for demonstration purposes
 }
+
+#ifdef WINDOWS
+
+int main()
+{
+  setup();
+  while (1)
+  {
+    loop();
+  }
+  return 0;
+}
+#endif // WINDOWS
