@@ -1,3 +1,4 @@
 .pio
 **/*.o
 **/*.exe
+.vscode/c_cpp_properties.json
