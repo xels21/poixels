@@ -1,15 +1,7 @@
 #ifndef TIME_H
 #define TIME_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-// Cross-platform sleep function
-void sleep(int milliseconds);
-
-#ifdef __cplusplus
-}
-#endif
+// Cross-platform sleep/delay function (C++ API)
+void sleep_ms(int milliseconds);
 
 #endif // TIME_H
