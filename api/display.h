@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 #include <vector>
-#include <memory>
 
 struct RGB
 {
@@ -16,12 +15,14 @@ class Display
 {
 private:
   struct Impl; // forward declaration
-  std::unique_ptr<Impl> pImpl; // pointer to platform-specific implementation
+  Impl* pImpl; // pointer to platform-specific implementation
+  int pixelCount;
 public:
   explicit Display(int pixelCount);
   ~Display();
   void setPixel(int idx, RGB color);
   void show();
+  int getPixelCount() const { return pixelCount; }
 };
 
 #endif // DISPLAY_H

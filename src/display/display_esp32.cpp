@@ -5,14 +5,14 @@
 struct Display::Impl
 {
   Adafruit_NeoPixel strip;
-  Impl(int pixelCount) : strip(pixelCount, /*pin*/ 2, NEO_GRB + NEO_KHZ800)
+  Impl(int pixelCount) : strip(pixelCount, /*pin*/ LED_PIN, NEO_GRB + NEO_KHZ800)
   {
     strip.begin();
   }
 };
 
-Display::Display(int pixelCount) : pImpl(std::make_unique<Impl>(pixelCount)) {}
-Display::~Display() = default;
+Display::Display(int pixelCount) : pImpl(new Impl(pixelCount)), pixelCount(pixelCount) {}
+Display::~Display() { delete pImpl; }
 
 void Display::setPixel(int idx, RGB c)
 {

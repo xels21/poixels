@@ -1,6 +1,6 @@
 #ifdef WINDOWS
 
-#include "time.h"
+#include "poixels_time.h"
 #include <windows.h>
 
 void sleep_ms(int milliseconds)

@@ -1,46 +1,33 @@
-#include "log.h"     ///< for logging
-#include "time.h"    ///< for timing stuff..
-#include "display.h" ///< for display handling
+// src/main.cpp (updated)
+#include "log.h"
+#include "poixels_time.h"  // renamed
+#include "application.h"
 
-static Display *display;
+static PoixelsApp app;  // Single app instance
 
-void setup()
-{
-  log_init(LOG_LEVEL_INFO);
-  LOG_INFO("POIXELS", "Inizializing...");
-
-  display = new Display(LED_COUNT);
-
-  // display = new PoixelsDisplay(LED_COUNT);
-  // if (!display->begin()) {
-  //     Serial.println("Failed to initialize display");
-  //     return;
-  // }
-
-  // webServer = new WebServer(80, display);
-  // if (!webServer->begin())
-  // {
-  //   Serial.println("Failed to start web server");
-  //   return;
-  // }
-  LOG_INFO("POIXELS", "Setup finished");
+void setup() {
+    log_init(LOG_LEVEL_INFO);
+    LOG_INFO("POIXELS", "Starting...");
+    
+    if (!app.initialize(LED_COUNT)) {
+        LOG_FATAL("POIXELS", "Failed to initialize application");
+        return;
+    }
+    
+    LOG_INFO("POIXELS", "Setup finished");
 }
 
-void loop()
-{
-  display->show();
-  sleep_ms(1000); // Delay for demonstration purposes
+void loop() {
+    app.update();
+    sleep_ms(1000);
 }
 
 #ifdef WINDOWS
-
-int main()
-{
-  setup();
-  while (1)
-  {
-    loop();
-  }
-  return 0;
+int main() {
+    setup();
+    while (1) {
+        loop();
+    }
+    return 0;
 }
-#endif // WINDOWS
+#endif
