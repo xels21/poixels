@@ -12,13 +12,13 @@ void PoixelsApp::applyCLIArgs(int argc, char **argv)
     const char *arg = argv[i];
     if ((strcmp(arg, "--help") == 0) || (strcmp(arg, "-h") == 0))
     {
-      LOG_INFO("CLI", "Options: --pixels N --port P --profile NAME --headless");
+      LOG_INFO("CLI", "Options: --pixel-count N --http-port P --profile NAME --headless");
     }
-    else if (strcmp(arg, "--pixels") == 0 && i + 1 < argc)
+    else if (strcmp(arg, "--pixel-count") == 0 && i + 1 < argc)
     {
       config.pixelCount = atoi(argv[++i]);
     }
-    else if (strcmp(arg, "--port") == 0 && i + 1 < argc)
+    else if (strcmp(arg, "--http-port") == 0 && i + 1 < argc)
     {
       config.httpPort = atoi(argv[++i]);
     }

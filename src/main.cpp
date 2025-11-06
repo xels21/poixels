@@ -8,7 +8,7 @@ static PoixelsApp app;  // Single app instance
 void setup() {
     log_init(LOG_LEVEL_INFO);
     LOG_INFO("POIXELS", "Starting...");
-    
+
     if (!app.initialize()) {
         LOG_FATAL("POIXELS", "Failed to initialize application");
         return;

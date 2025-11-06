@@ -32,6 +32,9 @@ PoixelsApp::~PoixelsApp()
 bool PoixelsApp::initialize()
 {
     LOG_INFO("APP", "Initializing components...");
+    LOG_INFO("APP", "Pixel Count: %d", config.pixelCount);
+    LOG_INFO("APP", "HTTP Port: %d", config.httpPort);
+    LOG_INFO("APP", "Headless: %s", config.headless ? "true" : "false");
 
     display = new Display(config.pixelCount);
     if (!display)
