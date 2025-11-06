@@ -2,37 +2,63 @@
 #include "application.h"
 #include "log.h"
 
-PoixelsApp::PoixelsApp() : display(nullptr) {}
+PoixelsApp::PoixelsApp() : display(nullptr)
+{
+    // Start from defines if available, else defaults
+    this->config = {
+        .pixelCount = 32,
+        .httpPort = 80,
+        .headless = false,
+        .profile = "default"};
+#ifdef LED_COUNT
+    this->config.pixelCount = LED_COUNT;
+#endif
+#ifdef WEB_PORT
+    this->config.httpPort = WEB_PORT;
+#endif
+#ifdef HEADLESS
+    this->config.headless = true;
+#endif
+#ifdef APP_PROFILE
+    this->config.profile = APP_PROFILE;
+#endif
+}
 
-PoixelsApp::~PoixelsApp() {
+PoixelsApp::~PoixelsApp()
+{
     shutdown();
 }
 
-bool PoixelsApp::initialize(int pixelCount) {
+bool PoixelsApp::initialize()
+{
     LOG_INFO("APP", "Initializing components...");
 
-    display = new Display(pixelCount);
-    if (!display) {
+    display = new Display(config.pixelCount);
+    if (!display)
+    {
         LOG_ERROR("APP", "Failed to create display");
         return false;
     }
-    
+
     // Future: initialize web server, sensors, etc.
-    
+
     LOG_INFO("APP", "All components initialized");
     return true;
 }
 
-void PoixelsApp::update() {
+void PoixelsApp::update()
+{
     // Update all components each frame
-    if (display) {
+    if (display)
+    {
         display->show();
     }
-    
+
     // Future: webServer->handleClients(), sensors->read(), etc.
 }
 
-void PoixelsApp::shutdown() {
+void PoixelsApp::shutdown()
+{
     delete display;
     display = nullptr;
     // Future: cleanup other components

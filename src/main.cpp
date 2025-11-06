@@ -9,7 +9,7 @@ void setup() {
     log_init(LOG_LEVEL_INFO);
     LOG_INFO("POIXELS", "Starting...");
     
-    if (!app.initialize(LED_COUNT)) {
+    if (!app.initialize()) {
         LOG_FATAL("POIXELS", "Failed to initialize application");
         return;
     }
@@ -23,7 +23,10 @@ void loop() {
 }
 
 #ifdef WINDOWS
-int main() {
+int main(int argc, char** argv) {
+    // Allow CLI overrides before initialization
+    app.applyCLIArgs(argc, argv);
+
     setup();
     while (1) {
         loop();
